@@ -8,7 +8,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/20/solid'
 import { EventSourceInput } from '@fullcalendar/core/index.js'
 import listPlugin from '@fullcalendar/list';
-import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+
 
 
 
@@ -72,11 +72,9 @@ export default function Home() {
   return prevEvents.filter(ev => {
     return ev.title !== event.title;
   });
-});
+    });
    
-      //setEvents(prevEvents => prevEvents.filter(ev => Number(ev.title) !== Number(event.title)));
-      // setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-  }
+}
  
 
   function handleDeleteModal(data: { event: { id: string } }) {
@@ -156,13 +154,13 @@ export default function Home() {
                 interactionPlugin,
                 timeGridPlugin,
                 listPlugin,
-                resourceTimelinePlugin
+               
               ]}
               headerToolbar={{
                 left: 'prev,next today',
                 center: 'title',
                 // right: 'resourceTimelineWeek, dayGridMonth,timeGridWeek'
-                right: 'dayGridMonth,timeGridWeek,listWeek,resourceTimelineWeek'
+                right: 'dayGridMonth,timeGridWeek,listWeek'
               }}
               events={allEvents as EventSourceInput}
               nowIndicator={true}
@@ -174,6 +172,7 @@ export default function Home() {
               drop={(data) => addEvent(data)}
               eventTextColor='#000'
               eventClick={(data) => handleDeleteModal(data)}
+              
               
               
             />
