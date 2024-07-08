@@ -22,12 +22,28 @@ interface Event {
 
 export default function Home() {
   const [events, setEvents] = useState([
-    {  title: 'Conference', id: '1', backgroundColor: '#ff5733'},
-    { title: 'Meeting', id: '2',backgroundColor: '#33ff57' },
-    { title: 'Workshop', id: '3' ,backgroundColor: '#3357ff'},
-    { title: 'Webinar', id: '4' ,backgroundColor: '#ff33ff'},
-    { title: 'Networking Event', id: '5' ,backgroundColor: '#ff9933'},
-  ])
+  { title: 'Conference', id: '1', backgroundColor: '#ff5733' },
+  { title: 'Meeting', id: '2', backgroundColor: '#33ff57' },
+  { title: 'Workshop', id: '3', backgroundColor: '#3357ff' },
+  { title: 'Webinar', id: '4', backgroundColor: '#ff33ff' },
+  { title: 'Networking Event', id: '5', backgroundColor: '#ff9933' },
+  { title: 'Team Building', id: '6', backgroundColor: '#33ccff' },
+  { title: 'Product Launch', id: '7', backgroundColor: '#ff3333' },
+  { title: 'Client Meeting', id: '8', backgroundColor: '#33ff99' },
+  { title: 'Annual Review', id: '9', backgroundColor: '#9933ff' },
+  { title: 'Strategy Session', id: '10', backgroundColor: '#ffcc33' },
+  { title: 'Brainstorming', id: '11', backgroundColor: '#33ffcc' },
+  { title: 'Sales Call', id: '12', backgroundColor: '#ff3333' },
+  { title: 'Project Kickoff', id: '13', backgroundColor: '#33cc33' },
+  { title: 'Design Review', id: '14', backgroundColor: '#ff6699' },
+  { title: 'Town Hall', id: '15', backgroundColor: '#6699ff' },
+  { title: 'Training Session', id: '16', backgroundColor: '#ff9933' },
+  { title: 'Focus Group', id: '17', backgroundColor: '#33ff57' },
+  { title: 'Advisory Board', id: '18', backgroundColor: '#ff33cc' },
+  { title: 'Press Conference', id: '19', backgroundColor: '#33ccff' },
+  { title: 'All Hands Meeting', id: '20', backgroundColor: '#ffcc33' },
+]);
+
   const [allEvents, setAllEvents] = useState<Event[]>([])
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
@@ -142,13 +158,11 @@ export default function Home() {
 
   return (
     <>
-      <nav className="flex justify-between mb-12 border-b border-violet-100 p-4">
-        <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
-      </nav>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="grid grid-cols-10">
-          <div className="col-span-8">
-            <FullCalendar
+   
+      <main className="p-5 h-full w-full">
+        <div className="flex flex-col gap-5">
+          <div className=''>
+             <FullCalendar
               plugins={[
                 dayGridPlugin,
                 interactionPlugin,
@@ -160,7 +174,8 @@ export default function Home() {
                 left: 'prev,next today',
                 center: 'title',
                 // right: 'resourceTimelineWeek, dayGridMonth,timeGridWeek'
-                right: 'dayGridMonth,timeGridWeek,listWeek'
+                //right: 'dayGridMonth,timeGridWeek,listWeek'
+                right: ''
               }}
               events={allEvents as EventSourceInput}
               nowIndicator={true}
@@ -172,26 +187,31 @@ export default function Home() {
               drop={(data) => addEvent(data)}
               eventTextColor='#000'
               eventClick={(data) => handleDeleteModal(data)}
+              height="700px"
               
-              
-              
-            />
+              />
           </div>
-          <div id="draggable-el" className="ml-8 w-full border-2 p-2 rounded-md mt-16 lg:h-1/2 bg-violet-100">
-            <h1 className="font-bold text-lg text-center">Drag Event</h1>
-            {events.map(event => (
-              <div
-                className="fc-event border-2 p-1 m-2 w-full rounded-md ml-auto text-center"
-                title={event.title}
-                key={event.id}
-                style={{ backgroundColor: event.backgroundColor, cursor: 'pointer', color: '#000' }}
-               
-              >
-                {event.title}
-              </div>
-            ))}
-          </div>
-        </div>
+          <div id="draggable-el" className="w-full bg-slate-200 p-4">
+                 <h1 className="font-bold text-lg text-center mb-4">Available Task</h1>
+                
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
+                    {events.map(event => (
+                       <div
+                       className="fc-event flex items-center justify-center border-2 p-1 w-full h-8 rounded-2xl text-center"
+                        title={event.title}
+                        key={event.id}
+                        style={{ backgroundColor: event.backgroundColor, cursor: 'pointer', color: '#000' }}
+                          >
+                      {event.title}
+                         </div>
+                   ))}
+                 </div>
+            </div>
+
+   
+        
+
+         </div>
 
         <Transition.Root show={showDeleteModal} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={setShowDeleteModal}>
